@@ -9,16 +9,35 @@ import 'dart:math';
 //  Input: [7,1,5,3,6,4]
 //  Output: 5
 
-stockProfit(List <int> stock){
+stockProfit(List<int> stock) {
   int maxProfit = 0;
-  for (int i = 0; i < stock.length; i++){
+//  int minimum = stock[0];
+  for (int i = 0; i < stock.length - 1; i++) {
     int profit = stock.sublist(i, stock.length).reduce(max) - stock [i];
     if (profit > maxProfit){
       maxProfit = profit;
     }}
+//    if (stock[i] > stock[i + 1]) {
+//      minimum = stock[i + 1];
+//    }
+//    if (maxProfit < stock[i] - minimum) {
+//      maxProfit = stock[i + 1] - stock[i];
+//    }
+//  }
   return maxProfit;
 }
 
+profitFromStock(int index, List<int> stock) {
+  List copy = List.from(stock);
+  if (index > 0) {
+    for (int i = 0; i < index; i++) {
+      stock.removeAt(i);
+    }
+    return stock.reduce(max) - copy[index];
+  }
+  return stock.reduce(max) - copy[index];
+}
+
 main() {
-  print(stockProfit([7,1,5,3,6,4]));
+  print(stockProfit([7, 1, 5, 3, 6, 4]));
 }
